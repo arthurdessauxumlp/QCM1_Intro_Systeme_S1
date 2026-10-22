@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QCM Intro Système - BUT S1 (50 Questions)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'Consolas', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.05);
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.2);
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
+
+    <!-- HEADER / NAVBAR -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="resetToHome()">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
+                    <i class="fa-solid fa-terminal text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight bg-gradient-to-r from-brand-600 to-indigo-600 dark:from-brand-400 dark:to-indigo-400 bg-clip-text text-transparent">
+                        QCM Intro Système
+                    </h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">BUT S1 — Commandes & OS Linux</p>
+                </div>
+            </div>
+
+            <!-- Controls (Theme & Reset) -->
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <button id="themeToggle" onclick="toggleTheme()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors" title="Changer le thème">
+                    <i id="themeIcon" class="fa-solid fa-moon text-base"></i>
+                </button>
+                <button onclick="resetToHome()" class="px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="hidden sm:inline">Accueil</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-4xl w-full mx-auto px-4 sm:px-6 py-6 flex-grow">
+
+        <!-- SCREEN 1: WELCOME & SETUP -->
+        <div id="welcomeScreen" class="space-y-6 animate-fade-in">
+            <!-- Hero Card -->
+            <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-brand-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-brand-400 pointer-events-none">
+                    <i class="fa-brands fa-linux text-[220px]"></i>
+                </div>
+                <div class="relative z-10 max-w-2xl">
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/30 text-brand-300 border border-brand-400/30 inline-block mb-3">
+                        <i class="fa-solid fa-graduation-cap mr-1"></i> Révision Intégrale - 50 Questions
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3">
+                        Entraînement complet aux Systèmes d'Exploitation
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                        Testez vos connaissances sur les parties 1 à 4 du cours BUT S1 : historique Linux, inodes, droits, commandes de base, flux & redirections, gestion des processus, dits système, dÉmons et gestion des utilisateurs.
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10">
+                            <div class="text-xl font-bold text-brand-400">12 Qs</div>
+                            <div class="text-xs text-slate-300">Partie 1 (Bases)</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10">
+                            <div class="text-xl font-bold text-emerald-400">16 Qs</div>
+                            <div class="text-xs text-slate-300">Partie 2 (Cmds/Flux)</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10">
+                            <div class="text-xl font-bold text-amber-400">12 Qs</div>
+                            <div class="text-xs text-slate-300">Partie 3 (Arch/Proc)</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10">
+                            <div class="text-xl font-bold text-purple-400">10 Qs</div>
+                            <div class="text-xs text-slate-300">Partie 4 (Users)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Setup Options -->
+            <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 space-y-6">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-brand-500"></i> Configuration du Questionnaire
+                </h3>
+
+                <!-- Filter by Part -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
+                        1. Choisir le périmètre du cours
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="partSelectorGroup">
+                        <button onclick="selectPartFilter('ALL')" data-part="ALL" class="part-btn p-4 rounded-2xl border-2 text-left transition-all border-brand-500 bg-brand-50/50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-300">
+                            <div class="font-bold text-sm flex items-center justify-between">
+                                <span>Toutes les parties</span>
+                                <span class="badge font-mono text-xs px-2 py-0.5 rounded-full bg-brand-200 dark:bg-brand-800 text-brand-800 dark:text-brand-200">50 Qs</span>
+                            </div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Examen complet (Parties 1, 2, 3 et 4)</div>
+                        </button>
+                        <button onclick="selectPartFilter(1)" data-part="1" class="part-btn p-4 rounded-2xl border-2 text-left transition-all border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600">
+                            <div class="font-bold text-sm flex items-center justify-between">
+                                <span>Partie 1</span>
+                                <span class="badge font-mono text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">12 Qs</span>
+                            </div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Généralités, Inodes, Nommage & Perms</div>
+                        </button>
+                        <button onclick="selectPartFilter(2)" data-part="2" class="part-btn p-4 rounded-2xl border-2 text-left transition-all border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600">
+                            <div class="font-bold text-sm flex items-center justify-between">
+                                <span>Partie 2</span>
+                                <span class="badge font-mono text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">16 Qs</span>
+                            </div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Commandes, Documentation, Flux & Pipes</div>
+                        </button>
+                        <button onclick="selectPartFilter(3)" data-part="3" class="part-btn p-4 rounded-2xl border-2 text-left transition-all border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600">
+                            <div class="font-bold text-sm flex items-center justify-between">
+                                <span>Partie 3</span>
+                                <span class="badge font-mono text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">12 Qs</span>
+                            </div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Processus, Arborescence, Démons & Infos</div>
+                        </button>
+                        <button onclick="selectPartFilter(4)" data-part="4" class="part-btn p-4 rounded-2xl border-2 text-left transition-all border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600">
+                            <div class="font-bold text-sm flex items-center justify-between">
+                                <span>Partie 4</span>
+                                <span class="badge font-mono text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">10 Qs</span>
+                            </div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Gestion Utilisateurs, Groupes, /etc/passwd</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mode Selection -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
+                        2. Choisir le mode de jeu
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="quizMode" value="PRACTICE" checked class="peer sr-only" onchange="selectMode('PRACTICE')">
+                            <div class="p-4 rounded-2xl border-2 border-slate-200 dark:border-slate-700 peer-checked:border-brand-500 peer-checked:bg-brand-50/40 dark:peer-checked:bg-brand-900/20 transition-all flex items-start space-x-3">
+                                <div class="mt-1 text-brand-500">
+                                    <i class="fa-solid fa-lightbulb text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-sm text-slate-900 dark:text-white">Mode Entraînement</div>
+                                    <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
+                                        Correction immédiate à chaque question avec explications et extraits du cours. Sans limite de temps.
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="quizMode" value="EXAM" class="peer sr-only" onchange="selectMode('EXAM')">
+                            <div class="p-4 rounded-2xl border-2 border-slate-200 dark:border-slate-700 peer-checked:border-indigo-500 peer-checked:bg-indigo-50/40 dark:peer-checked:bg-indigo-900/20 transition-all flex items-start space-x-3">
+                                <div class="mt-1 text-indigo-500">
+                                    <i class="fa-solid fa-stopwatch text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-sm text-slate-900 dark:text-white">Mode Examen Chronométré</div>
+                                    <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
+                                        Conditions d'évaluation. Réponses enchaînées, chronomètre actif et résultat complet uniquement à la fin.
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Start Button -->
+                <button onclick="startQuiz()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-bold text-base shadow-lg shadow-brand-500/25 transition-all transform active:scale-[0.99] flex items-center justify-center space-x-2">
+                    <span>Lancer le Questionnaire</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SCREEN 2: ACTIVE QUIZ -->
+        <div id="quizScreen" class="hidden space-y-6">
+
+            <!-- Quiz Header / Progress Bar -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 dark:border-slate-700 space-y-3">
+                <div class="flex items-center justify-between text-xs sm:text-sm font-semibold">
+                    <div class="flex items-center space-x-2">
+                        <span id="partBadge" class="px-2.5 py-1 rounded-lg bg-brand-100 dark:bg-brand-900/50 text-brand-700 dark:text-brand-300 font-mono text-xs">Partie 1</span>
+                        <span id="questionCounter" class="text-slate-500 dark:text-slate-400">Question 1 / 50</span>
+                    </div>
+                    <div id="timerContainer" class="flex items-center space-x-1.5 text-amber-600 dark:text-amber-400 font-mono font-bold">
+                        <i class="fa-regular fa-clock"></i>
+                        <span id="timerDisplay">00:00</span>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                    <div id="progressBar" class="h-full bg-gradient-to-r from-brand-500 to-indigo-500 transition-all duration-300 w-0"></div>
+                </div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 dark:border-slate-700 space-y-6">
+                
+                <!-- Question Text -->
+                <div class="space-y-2">
+                    <span id="difficultyBadge" class="inline-block text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">
+                        Niveau Standard
+                    </span>
+                    <h3 id="questionText" class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-snug">
+                        <!-- Question content injected dynamically -->
+                    </h3>
+                </div>
+
+                <!-- Options Grid -->
+                <div id="optionsContainer" class="space-y-3">
+                    <!-- Options injected dynamically -->
+                </div>
+
+                <!-- Explanation Panel (For Practice Mode) -->
+                <div id="explanationPanel" class="hidden p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 space-y-2 animate-fade-in">
+                    <div id="explanationHeader" class="font-bold text-sm flex items-center space-x-2">
+                        <!-- Header icon + text -->
+                    </div>
+                    <p id="explanationText" class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                        <!-- Detailed slide explanation -->
+                    </p>
+                </div>
+
+                <!-- Action Button Container -->
+                <div class="flex justify-end pt-2">
+                    <button id="nextBtn" onclick="nextQuestion()" class="hidden px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-sm transition-all shadow-md flex items-center space-x-2">
+                        <span>Question Suivante</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: RESULTS & SUMMARY -->
+        <div id="resultsScreen" class="hidden space-y-6">
+            
+            <!-- Result Header Card -->
+            <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 dark:border-slate-700 text-center space-y-4">
+                <div class="w-20 h-20 mx-auto rounded-full bg-brand-50 dark:bg-brand-900/30 flex items-center justify-center text-brand-600 dark:text-brand-400 text-3xl shadow-inner">
+                    <i id="scoreIcon" class="fa-solid fa-trophy"></i>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Bilan de votre Test</h2>
+                    <p id="scoreMessage" class="text-sm text-slate-500 dark:text-slate-400 mt-1">Analyse de vos connaissances en OS Linux</p>
+                </div>
+
+                <!-- Score Big Display -->
+                <div class="py-3">
+                    <div class="text-4xl sm:text-5xl font-black text-brand-600 dark:text-brand-400 font-mono">
+                        <span id="scoreNumber">0</span> / <span id="totalQuestionsNumber">50</span>
+                    </div>
+                    <div id="scorePercentage" class="text-sm font-bold text-slate-500 dark:text-slate-400 mt-1">
+                        0% de réussite
+                    </div>
+                </div>
+
+                <!-- Stats summary bar -->
+                <div class="grid grid-cols-3 gap-3 max-w-md mx-auto pt-2 border-t border-slate-100 dark:border-slate-700 text-xs sm:text-sm">
+                    <div>
+                        <div class="text-slate-400">Temps écoule</div>
+                        <div id="totalTimeSpent" class="font-bold font-mono text-slate-700 dark:text-slate-200">00:00</div>
+                    </div>
+                    <div>
+                        <div class="text-slate-400">Correctes</div>
+                        <div id="correctCount" class="font-bold font-mono text-emerald-600 dark:text-emerald-400">0</div>
+                    </div>
+                    <div>
+                        <div class="text-slate-400">Erreurs</div>
+                        <div id="incorrectCount" class="font-bold font-mono text-rose-600 dark:text-rose-400">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Breakdown by Part -->
+            <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 space-y-4">
+                <h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center space-x-2">
+                    <i class="fa-solid fa-chart-pie text-brand-500"></i>
+                    <span>Performance par Partie du cours</span>
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="partBreakdownContainer">
+                    <!-- Dynamic breakdown cards per part -->
+                </div>
+            </div>
+
+            <!-- Detailed Question Review Table -->
+            <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-list-check text-brand-500"></i>
+                        <span>Détail des Réponses & Corrections</span>
+                    </h3>
+                    <div class="flex items-center space-x-2 text-xs">
+                        <button onclick="filterReviewTable('ALL')" id="filterReviewAll" class="px-3 py-1.5 rounded-lg bg-brand-600 text-white font-semibold">Toutes</button>
+                        <button onclick="filterReviewTable('ERRORS')" id="filterReviewErrors" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-semibold">Erreurs uniquement</button>
+                    </div>
+                </div>
+
+                <div id="reviewContainer" class="space-y-4 pt-2">
+                    <!-- Review items injected here -->
+                </div>
+            </div>
+
+            <!-- Retry / Home Actions -->
+            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                <button onclick="resetToHome()" class="flex-1 py-3.5 px-6 rounded-2xl bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-white font-bold text-sm transition-all text-center">
+                    Changer de paramétrage
+                </button>
+                <button onclick="restartQuizWithSameFilter()" class="flex-1 py-3.5 px-6 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-sm transition-all shadow-lg shadow-brand-500/20 text-center">
+                    Recommencer ce quiz
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 py-4 mt-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-xs text-slate-500 dark:text-slate-400">
+            Conforme au cours <span class="font-semibold text-slate-700 dark:text-slate-300">Introduction aux systèmes d'exploitation - BUT S1</span> — QCM interactif de 50 questions.
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT QUIZ ENGINE & DATABASE -->
+    <script>
+        /* ==========================================================================
+           50 QUESTIONS DATABASE (Verbatim from BUT S1 Course Slides)
+           ========================================================================== */
+        const quizDatabase = [
+            // PARTIE 1: 12 QUESTIONS (0 to 11)
+            {
+                id: 1,
+                part: 1,
+                difficulty: "Facile",
+                question: "En quelle année le noyau Linux a-t-il été créé par Linus Torvalds, et sous quelle licence libre a-t-il été diffusé à partir de 1992 ?",
+                options: [
+                    "Noyau créé en 1985, sous licence Apache",
+                    "Noyau créé en 1991, sous licence GNU GPL",
+                    "Noyau créé en 1995, sous licence MIT",
+                    "Noyau créé en 1998, sous licence BSD"
+                ],
+                correct: 1,
+                explanation: "Diapo 6 : Le noyau Linux a été créé en 1991 par Linus Torvalds et diffusé sous la licence libre GNU GPL à partir de 1992. Il répond aux spécifications de la norme POSIX."
+            },
+            {
+                id: 2,
+                part: 1,
+                difficulty: "Moyen",
+                question: "Quelle est la définition exacte d'une distribution Linux d'après le cours ?",
+                options: [
+                    "Il s'agit uniquement du noyau Linux sans aucun logiciel",
+                    "C'est un ensemble composé du noyau Linux et d'un paquet de logiciels de bureautique uniquement",
+                    "Une distribution est composée du noyau et d'un ensemble de paquets fournissant des outils, un terminal et des logiciels prêts à l'emploi",
+                    "C'est un sous-système Windows permettant d'exécuter du code C++"
+                ],
+                correct: 2,
+                explanation: "Diapos 8 & 9 : Une distribution Linux est composée du noyau et d'un ensemble de paquets (terminal bash, pilotes, interface graphique, logiciels) formant un système d'exploitation complet."
+            },
+            {
+                id: 3,
+                part: 1,
+                difficulty: "Moyen",
+                question: "Lequel des éléments suivants n'est PAS contenu dans l'inode d'un fichier sous Linux ?",
+                options: [
+                    "La taille du fichier et l'identifiant du propriétaire (UID)",
+                    "Le numéro d'inode et le mode (droits d'accès)",
+                    "Le nom du fichier",
+                    "L'horodatage (dates de modification et de dernier accès)"
+                ],
+                correct: 2,
+                explanation: "Diapos 13 & 14 : ATTENTION ! L'inode d'un fichier contient son numéro, sa taille, l'UID/GID, les droits et l'horodatage, mais il NE contient PAS son nom ! Un fichier peut exister sous plusieurs noms (liens)."
+            },
+            {
+                id: 4,
+                part: 1,
+                difficulty: "Facile",
+                question: "Comment le système de fichiers Linux gère-t-il les différentes partitions ou lecteurs externes ?",
+                options: [
+                    "En attribuant une lettre de lecteur comme sous Windows (ex: C:, D:)",
+                    "En les 'montant' dans des répertoires de l'unique arborescence racine '/'",
+                    "En créant un système virtuel indépendant hors du système de fichiers",
+                    "Seul le disque principal peut être lu par Linux"
+                ],
+                correct: 1,
+                explanation: "Diapo 12 : Dans Linux, il n'y a pas de lettre de lecteur comme sous Windows. L'ensemble du système forme une seule arborescence dont la racine est '/'. Les partitions et disques externes sont 'montés' dans des répertoires."
+            },
+            {
+                id: 5,
+                part: 1,
+                difficulty: "Moyen",
+                question: "Quels sont les seuls caractères strictement interdits dans un nom de fichier sous Linux ?",
+                options: [
+                    "Le caractère '/' et le caractère NUL",
+                    "Le caractère 'espace' et le caractère '.'",
+                    "Les tirets '-' et le symbole '$'",
+                    "Les lettres accentuées"
+                ],
+                correct: 0,
+                explanation: "Diapos 18 & 19 : Le caractère '/' est strictement interdit dans un nom de fichier car il sert de séparateur de répertoire dans un chemin. Le caractère NUL (\0) marque la fin des chaînes en C."
+            },
+            {
+                id: 6,
+                part: 1,
+                difficulty: "Difficile",
+                question: "Pourquoi est-il fortement déconseillé de nommer un fichier en le faisant commencer par un tiret '-' ?",
+                options: [
+                    "Le fichier devient immédiatement corrompu",
+                    "Le terminal interprète le tiret initial comme une option/paramètre pour la commande appelée",
+                    "Le système le convertit automatiquement en fichier caché",
+                    "Root ne pourra plus jamais supprimer ce fichier"
+                ],
+                correct: 1,
+                explanation: "Diapo 18 : Le caractère '-' peut être utilisé mais est à éviter au début d'un nom de fichier car le terminal interprète le '-' comme un paramètre/option de commande, provoquant une erreur de syntaxe."
+            },
+            {
+                id: 7,
+                part: 1,
+                difficulty: "Moyen",
+                question: "Comment 'échapper' un caractère spécial (comme le signe '$' ou un espace) dans un nom de fichier en ligne de commande ?",
+                options: [
+                    "En le précédant du caractère 'backslash' \\ (ex: \\$)",
+                    "En le mettant entre crochets [ $ ]",
+                    "En le précédant du signe %",
+                    "Il est impossible d'utiliser des caractères spéciaux"
+                ],
+                correct: 0,
+                explanation: "Diapo 17 : Pour échapper un caractère spécial, on le précède d'un '\\' (ex: '\\$'). Pour échapper le caractère '\\' lui-même, on l'écrit deux fois '\\\\'."
+            },
+            {
+                id: 8,
+                part: 1,
+                difficulty: "Facile",
+                question: "Sous Linux, comment est identifié un fichier ou un répertoire caché ?",
+                options: [
+                    "Son nom termine par '.bak'",
+                    "Son nom commence par un point '.' (ex: .bashrc)",
+                    "Il est placé obligatoirement dans le répertoire /tmp",
+                    "Il possède l'attribut spécial 'h' dans son inode"
+                ],
+                correct: 1,
+                explanation: "Diapo 20 : Un fichier ou répertoire commençant par un point '.' est un fichier caché (ex: ~/.bashrc)."
+            },
+            {
+                id: 9,
+                part: 1,
+                difficulty: "Moyen",
+                question: "Quelle est la différence exacte entre le joker '?' et le joker '*' dans le nommage des fichiers ?",
+                options: [
+                    "'?' remplace plusieurs caractères et '*' remplace un chiffre",
+                    "'?' remplace exactement un et un seul caractère ; '*' remplace un nombre quelconque de caractères (y compris zéro)",
+                    "'*' fonctionne uniquement sur les répertoires et '?' sur les fichiers",
+                    "Il n'y a aucune différence"
+                ],
+                correct: 1,
+                explanation: "Diapos 25 & 26 : '?' permet de remplacer un et un seul caractère quelconque. '*' permet de remplacer un nombre quelconque de caractères, y compris aucun caractère."
+            },
+            {
+                id: 10,
+                part: 1,
+                difficulty: "Difficile",
+                question: "Quelle est l'exception majeure concernant les jokers ('*' et '?') vis-à-vis des fichiers cachés ?",
+                options: [
+                    "Les jokers détruisent les fichiers cachés s'ils sont utilisés",
+                    "Le caractère '.' initial d'un fichier caché ne peut pas être remplacé par un joker s'il est au début du nom",
+                    "Les jokers ne fonctionnent que sous le compte root pour les fichiers cachés",
+                    "Les fichiers cachés sont automatiquement inclus dans 'ls *'"
+                ],
+                correct: 1,
+                explanation: "Diapo 27 : Exception : Le caractère '.' ne peut pas être remplacé par un joker s'il est au début d'un nom de fichier. Conséquence : une chaîne avec joker porte soit sur les fichiers non-cachés, soit sur les cachés, mais pas les deux."
+            },
+            {
+                id: 11,
+                part: 1,
+                difficulty: "Moyen",
+                question: "Convertissez les permissions 'rwx rw- r--' en notation binaire puis en notation octale/décimale :",
+                options: [
+                    "111 110 100 = Mode 764",
+                    "111 101 001 = Mode 751",
+                    "110 110 100 = Mode 664",
+                    "111 111 111 = Mode 777"
+                ],
+                correct: 0,
+                explanation: "Diapos 34 & 35 : rwx = 111 (7), rw- = 110 (6), r-- = 100 (4). Le mode octal équivalent est donc 764."
+            },
+            {
+                id: 12,
+                part: 1,
+                difficulty: "Moyen",
+                question: "Quel droit spécifique (r, w ou x) est indispensable sur un répertoire pour pouvoir lister son contenu ou s'y déplacer ?",
+                options: [
+                    "Le droit de lecture 'r' seul",
+                    "Le droit d'écriture 'w'",
+                    "Le droit d'exécution 'x'",
+                    "Aucun droit n'est nécessaire pour un répertoire"
+                ],
+                correct: 2,
+                explanation: "Diapo 36 : Note du cours : Le droit d'exécution 'x' sur un répertoire est nécessaire pour pouvoir accéder/traverser et lister son contenu."
+            },
+
+            // PARTIE 2: 16 QUESTIONS (12 to 27)
+            {
+                id: 13,
+                part: 2,
+                difficulty: "Facile",
+                question: "Dans la syntaxe générale d'une commande affichée dans la documentation intégrée, que signifie un paramètre indiqué entre crochets [ ] ?",
+                options: [
+                    "Ce paramètre est obligatoire",
+                    "Ce paramètre est facultatif",
+                    "Ce paramètre doit être exécuté en tant que root",
+                    "Ce paramètre doit être répété 2 fois"
+                ],
+                correct: 1,
+                explanation: "Diapo 43 : Dans la syntaxe générale, si un paramètre est indiqué entre [ ], alors ce paramètre est facultatif."
+            },
+            {
+                id: 14,
+                part: 2,
+                difficulty: "Facile",
+                question: "Quelle commande permet d'obtenir un descriptif succinct des pages de manuels disponibles pour identifier la bonne page de manuel ?",
+                options: [
+                    "man",
+                    "whatis",
+                    "help",
+                    "info"
+                ],
+                correct: 1,
+                explanation: "Diapos 43 & 45 : 'whatis commande' permet d'avoir un descriptif des différentes pages de manuels pour une commande donnée."
+            },
+            {
+                id: 15,
+                part: 2,
+                difficulty: "Moyen",
+                question: "Vous êtes dans '/home/mickael/Documents/cours1'. Quel chemin relatif vous permet de désigner le fichier 'iut.png' situé dans '/home/mickael/Images' ?",
+                options: [
+                    "../Images/iut.png",
+                    "../../Images/iut.png",
+                    "./Images/iut.png",
+                    "/Images/iut.png"
+                ],
+                correct: 1,
+                explanation: "Diapos 21 & 22 : Depuis '/home/mickael/Documents/cours1', '..' remonte à 'Documents', puis le second '..' remonte à '/home/mickael'. Le chemin est donc '../../Images/iut.png'."
+            },
+            {
+                id: 16,
+                part: 2,
+                difficulty: "Moyen",
+                question: "Quelle option de la commande 'ls' permet d'afficher récursivement le contenu des sous-répertoires ?",
+                options: [
+                    "-r",
+                    "-R",
+                    "-a",
+                    "-l"
+                ],
+                correct: 1,
+                explanation: "Diapo 50 : Option -R (Majuscule) : Affiche récursivement le contenu des sous-répertoires. (Attention, -r en minuscule inverse l'ordre de tri)."
+            },
+            {
+                id: 17,
+                part: 2,
+                difficulty: "Moyen",
+                question: "Que réalise la commande 'mkdir -p a/b/c' ?",
+                options: [
+                    "Elle crée uniquement le répertoire 'c' dans le dossier courant",
+                    "Elle crée le répertoire 'c' ainsi que ses répertoires parents 'a' et 'b' si nécessaire",
+                    "Elle attribue les permissions système au répertoire 'c'",
+                    "Elle supprime les dossiers a et b avant de créer c"
+                ],
+                correct: 1,
+                explanation: "Diapo 52 : Option -p de mkdir : Crée les répertoires parents si nécessaire. Exemple : 'mkdir -p a/b/c' crée a et b en plus de c si besoin."
+            },
+            {
+                id: 18,
+                part: 2,
+                difficulty: "Moyen",
+                question: "Si vous effectuez une copie de fichier avec 'cp' sous le compte 'root' vers le dossier d'un utilisateur, à qui appartiendra la copie ?",
+                options: [
+                    "À l'utilisateur propriétaire du dossier de destination",
+                    "À l'utilisateur 'root' qui a effectué la copie",
+                    "À l'utilisateur 'nobody'",
+                    "Le fichier n'a plus de propriétaire"
+                ],
+                correct: 1,
+                explanation: "Diapo 55 : IMPORTANT : Les copies appartiennent à l'utilisateur qui a effectué la copie ! Si vous faites la copie en tant que 'root', pensez à rétablir le bon propriétaire (chown) !"
+            },
+            {
+                id: 19,
+                part: 2,
+                difficulty: "Moyen",
+                question: "Quelle est la différence importante entre la commande 'mv' et la commande 'cp' lors du déplacement d'un fichier ?",
+                options: [
+                    "'mv' nécessite obligatoirement l'option -r pour les dossiers",
+                    "Contrairement à 'cp', 'mv' conserve le propriétaire et le groupe d'origine des fichiers",
+                    "'mv' duplique toujours le fichier sur le disque",
+                    "'mv' réinitialise les permissions à 777"
+                ],
+                correct: 1,
+                explanation: "Diapo 55 : Note du cours : Contrairement à 'cp', 'mv' conserve le propriétaire et le groupe des fichiers (et le paramètre -r n'a aucun sens avec mv)."
+            },
+            {
+                id: 20,
+                part: 2,
+                difficulty: "Moyen",
+                question: "Quelle est la condition impérative pour pouvoir supprimer un répertoire avec la commande 'rmdir' ?",
+                options: [
+                    "Le répertoire doit appartenir à root",
+                    "Le répertoire doit être impérativement vide",
+                    "Le répertoire doit être un lien symbolique",
+                    "Il faut utiliser l'option -f"
+                ],
+                correct: 1,
+                explanation: "Diapo 59 : IMPORTANT : Un répertoire doit être vide pour pouvoir être supprimé avec rmdir ! Sinon il faut utiliser 'rm -r'."
+            },
+            {
+                id: 21,
+                part: 2,
+                difficulty: "Facile",
+                question: "Que fait la commande 'touch mon_fichier' si le fichier 'mon_fichier' existe déjà ?",
+                options: [
+                    "Elle efface le contenu du fichier",
+                    "Elle renvoie une erreur de syntaxe",
+                    "Elle met à jour sa date de dernière modification",
+                    "Elle duplique le fichier"
+                ],
+                correct: 2,
+                explanation: "Diapo 60 (et résumé) : 'touch' permet de créer un fichier vide S'IL N'EXISTE PAS, ou de mettre à jour sa date de dernière modification S'IL EXISTE DÉJÀ."
+            },
+            {
+                id: 22,
+                part: 2,
+                difficulty: "Moyen",
+                question: "Quelle est la syntaxe de base pour rechercher un fichier nommé 'notes.txt' de manière récursive à partir du répertoire '/home' ?",
+                options: [
+                    "find -name notes.txt /home",
+                    "find /home -name notes.txt",
+                    "grep notes.txt /home",
+                    "search /home -file notes.txt"
+                ],
+                correct: 1,
+                explanation: "Diapo 63 : Syntaxe de base : 'find racine -name fichier'. Donc 'find /home -name notes.txt'."
+            },
+            {
+                id: 23,
+                part: 2,
+                difficulty: "Moyen",
+                question: "Quelle option de la commande 'wget' permet de spécifier le nom du fichier de destination ou de passer en arrière-plan ?",
+                options: [
+                    "-b pour arrière-plan, -O fichier pour spécifier le nom de sortie",
+                    "-d pour arrière-plan, -s pour le nom",
+                    "-bg pour arrière-plan, -f pour le nom",
+                    "-q pour arrière-plan, -r pour le nom"
+                ],
+                correct: 0,
+                explanation: "Diapo 64 : wget options : -b passe la commande en arrière-plan ; -O fichier (Majuscule) spécifie le nom du fichier de destination."
+            },
+            {
+                id: 24,
+                part: 2,
+                difficulty: "Facile",
+                question: "Associez chaque canal standard à son numéro sous Linux : Entrada standard (stdin), Sortie standard (stdout), Sortie d'erreur (stderr).",
+                options: [
+                    "stdin = 0, stdout = 1, stderr = 2",
+                    "stdin = 1, stdout = 2, stderr = 3",
+                    "stdin = 2, stdout = 1, stderr = 0",
+                    "stdin = 0, stdout = 2, stderr = 1"
+                ],
+                correct: 0,
+                explanation: "Diapos 79 & 88 : Entrée standard (stdin) = canal 0, Sortie standard (stdout) = canal n°1, Sortie d'erreur (stderr) = canal n°2."
+            },
+            {
+                id: 25,
+                part: 2,
+                difficulty: "Difficile",
+                question: "Que réalise la commande suivante : 'cmd > rapport.log 2>&1' ?",
+                options: [
+                    "Elle redirige les erreurs vers le clavier et la sortie normale vers l'écran",
+                    "Elle redirige la sortie standard vers rapport.log ET la sortie d'erreur vers la sortie standard (donc aussi dans rapport.log)",
+                    "Elle annule la commande si une erreur survient",
+                    "Elle affiche les erreurs dans rapport.log et efface le terminal"
+                ],
+                correct: 1,
+                explanation: "Diapos 88 & 89 : '>' redirige stdout (canal 1) vers 'rapport.log', puis '2>&1' redirige stderr (canal 2) vers stdout (canal 1). Tout est consigné dans rapport.log."
+            },
+            {
+                id: 26,
+                part: 2,
+                difficulty: "Facile",
+                question: "Quel symbole (pipe) permet de transmettre directement la sortie standard d'une commande à l'entrée standard d'une autre commande ?",
+                options: [
+                    ">",
+                    ">>",
+                    "|",
+                    "&"
+                ],
+                correct: 2,
+                explanation: "Diapo 87 : Les tubes (pipe '|') permettent de transmettre la sortie standard d'une commande à l'entrée standard d'une autre. Syntaxe : cmd1 | cmd2."
+            },
+            {
+                id: 27,
+                part: 2,
+                difficulty: "Difficile",
+                question: "Comment extraire les logins des utilisateurs situés dans le 1er champ du fichier '/etc/passwd' (séparé par ':') qui commencent par 'ro' ?",
+                options: [
+                    "grep '^ro' /etc/passwd | cut -d: -f1",
+                    "cat /etc/passwd | cut -d: -f1 | grep '^ro'",
+                    "cut -f1 /etc/passwd | grep 'ro$'",
+                    "tail /etc/passwd | grep 'ro'"
+                ],
+                correct: 1,
+                explanation: "Diapos 86 & 90 : 'cut -d: -f1' extrait le 1er champ (séparateur ':'). 'grep ^ro' filtre les lignes commençant par 'ro'."
+            },
+            {
+                id: 28,
+                part: 2,
+                difficulty: "Moyen",
+                question: "Quelle option de la commande 'grep' permet d'inverser la recherche (afficher les lignes qui ne correspondent PAS au motif) ?",
+                options: [
+                    "-i",
+                    "-v",
+                    "-x",
+                    "-q"
+                ],
+                correct: 1,
+                explanation: "Diapos 83 : grep options : -i ignore la casse ; -v permet de rechercher les lignes qui ne correspondent PAS à pattern ; -q est silencieux."
+            },
+
+            // PARTIE 3: 12 QUESTIONS (28 to 39)
+            {
+                id: 29,
+                part: 3,
+                difficulty: "Moyen",
+                question: "Dans la séquence de démarrage de Linux, quel est le premier processus de l'OS chargé par le noyau (portant toujours le PID 1) ?",
+                options: [
+                    "GRUB2",
+                    "kthread",
+                    "init (ou systemd)",
+                    "bash"
+                ],
+                correct: 2,
+                explanation: "Diapos 97 & 98 : Le noyau démarre le premier processus de l'OS : 'init' (PID 1). Le second processus est 'kthread' (PID 2). Ce sont les seuls à avoir un PPID de 0."
+            },
+            {
+                id: 30,
+                part: 3,
+                difficulty: "Moyen",
+                question: "Qu'est-ce qu'un 'Kernel Panic' sous Linux et quelle est la seule façon d'en sortir ?",
+                options: [
+                    "C'est le plantage d'un terminal ; il suffit de fermer la fenêtre",
+                    "C'est un plantage critique du noyau ; la seule solution est de redémarrer physiquement la machine",
+                    "C'est une erreur de mot de passe de root ; il faut relancer SSH",
+                    "C'est une panne de disque dur gérée automatiquement par GRUB"
+                ],
+                correct: 1,
+                explanation: "Diapo 96 : Le noyau doit être extrêmement fiable ! Si celui-ci vient à planter, toute la machine plante : c'est un 'Kernel Panic'. La seule solution est de redémarrer physiquement la machine."
+            },
+            {
+                id: 31,
+                part: 3,
+                difficulty: "Moyen",
+                question: "Quelle commande et options permettent d'afficher la liste de tous les processus du système avec une présentation hiérarchique (arborescence des parents PPID) ?",
+                options: [
+                    "ps -efH",
+                    "ps -a",
+                    "top -h",
+                    "kill -l"
+                ],
+                correct: 0,
+                explanation: "Diapo 100 : En syntaxe traditionnelle : 'ps -efH' (-e tous les processus, -f infos détaillées dont PPID, -H tri hiérarchique)."
+            },
+            {
+                id: 32,
+                part: 3,
+                difficulty: "Moyen",
+                question: "Quel est le signal d'arrêt forcé ultime envoyé à un processus via la commande 'kill' (à n'utiliser qu'en cas de plantage récalcitrant) ?",
+                options: [
+                    "-15 (ou -TERM)",
+                    "-2 (ou -INT)",
+                    "-9 (ou -KILL)",
+                    "-0"
+                ],
+                correct: 2,
+                explanation: "Diapos 101 & 102 : -TERM ou -15 demande l'arrêt normal ; -KILL ou -9 force l'arrêt immédiat d'un processus, même s'il ne répond plus."
+            },
+            {
+                id: 33,
+                part: 3,
+                difficulty: "Facile",
+                question: "Dans l'arborescence standard de Linux, que contient le répertoire '/etc' ?",
+                options: [
+                    "Les fichiers exécutables de base du système",
+                    "La plupart des fichiers de configuration du système et des logiciels",
+                    "Les données temporaires supprimées au reboot",
+                    "Les répertoires personnels des utilisateurs"
+                ],
+                correct: 1,
+                explanation: "Diapo 106 : '/etc/' contient la plupart des fichiers de configuration du système et des logiciels installés."
+            },
+            {
+                id: 34,
+                part: 3,
+                difficulty: "Facile",
+                question: "Quel répertoire de l'arborescence Linux contient les fichiers représentant les périphériques matériels de la machine (Device files) ?",
+                options: [
+                    "/bin/",
+                    "/sys/",
+                    "/dev/",
+                    "/proc/"
+                ],
+                correct: 2,
+                explanation: "Diapo 106 : '/dev/' représente le matériel de la machine et permet à Linux de le manipuler (Device files)."
+            },
+            {
+                id: 35,
+                part: 3,
+                difficulty: "Moyen",
+                question: "Où se situe le répertoire personnel (home) de l'utilisateur 'root' sous Linux ?",
+                options: [
+                    "/home/root/",
+                    "/root/",
+                    "/var/root/",
+                    "/usr/root/"
+                ],
+                correct: 1,
+                explanation: "Diapo 109 : '/root/' est le répertoire de l'utilisateur 'root', le seul compte dont le dossier personnel n'est PAS situé dans '/home/'."
+            },
+            {
+                id: 36,
+                part: 3,
+                difficulty: "Facile",
+                question: "Qu'est-ce qu'un 'démon' (daemon) sous Linux ?",
+                options: [
+                    "Un virus informatique spécifique à Linux",
+                    "Un service tournant en arrière-plan sans nécessiter de session utilisateur ouverte",
+                    "Un script de démarrage réservé à GRUB2",
+                    "Un utilisateur sans droits d'accès"
+                ],
+                correct: 1,
+                explanation: "Diapo 112 : Démons = Services sous Windows. Ils fonctionnent en arrière-plan sans besoin de session utilisateur ouverte."
+            },
+            {
+                id: 37,
+                part: 3,
+                difficulty: "Moyen",
+                question: "Avec l'outil moderne 'systemctl', quelle commande permet de recharger le fichier de configuration d'un démon SANS stopper son processus ?",
+                options: [
+                    "systemctl restart service",
+                    "systemctl reload service",
+                    "systemctl enable service",
+                    "systemctl status service"
+                ],
+                correct: 1,
+                explanation: "Diapo 115 : 'systemctl reload nom_service' recharge la configuration sans redémarrer le processus (si le programme le prend en charge)."
+            },
+            {
+                id: 38,
+                part: 3,
+                difficulty: "Moyen",
+                question: "Que retourne la commande 'date +%s' sous Linux ?",
+                options: [
+                    "La date au format Année-Mois-Jour",
+                    "Le nombre de secondes écoulées depuis le 1er janvier 1970 (Timestamp UNIX)",
+                    "Le numéro de la semaine courante dans l'année",
+                    "L'heure précise en millisecondes"
+                ],
+                correct: 1,
+                explanation: "Diapo 120 : 'date +%s' affiche le 'timestamp' (nombre de secondes écoulées depuis le 1er janvier 1970)."
+            },
+            {
+                id: 39,
+                part: 3,
+                difficulty: "Moyen",
+                question: "Quelle option de la commande 'uname' permet d'afficher le nom de l'architecture matérielle de la machine (ex: x86_64 ou i686) ?",
+                options: [
+                    "-s",
+                    "-r",
+                    "-m",
+                    "-o"
+                ],
+                correct: 2,
+                explanation: "Diapo 122 : uname options : -s nom du noyau, -r révision, -m nom de l'architecture matérielle (ex: i686 / x86_64), -o nom de l'OS."
+            },
+            {
+                id: 40,
+                part: 3,
+                difficulty: "Facile",
+                question: "Quelle commande permet d'afficher la quantité de mémoire RAM et Swap libre et utilisée sur le système ?",
+                options: [
+                    "df -h",
+                    "du -sh",
+                    "free",
+                    "top"
+                ],
+                correct: 2,
+                explanation: "Diapos 128 & 129 : 'free' (ex: 'free -m' ou 'free -h') affiche la quantité de mémoire RAM et swap libre/utilisée."
+            },
+
+            // PARTIE 4: 10 QUESTIONS (40 to 49)
+            {
+                id: 41,
+                part: 4,
+                difficulty: "Facile",
+                question: "Quel est l'identifiant numérique unique (UID) toujours attribué à l'utilisateur 'root' (super-utilisateur) ?",
+                options: [
+                    "UID 1",
+                    "UID 1000",
+                    "UID 0",
+                    "UID -1"
+                ],
+                correct: 2,
+                explanation: "Diapo 135 : Le compte 'root', en tant que super-utilisateur, possède toujours l'UID 0."
+            },
+            {
+                id: 42,
+                part: 4,
+                difficulty: "Moyen",
+                question: "Dans quel fichier système sont enregistrées les informations relatives aux comptes utilisateurs (login, UID, GID principal, dossier home, shell...) ?",
+                options: [
+                    "/etc/shadow",
+                    "/etc/passwd",
+                    "/etc/group",
+                    "/var/users"
+                ],
+                correct: 1,
+                explanation: "Diapo 138 : L'ensemble des utilisateurs et de leurs informations sont présents dans le fichier '/etc/passwd'."
+            },
+            {
+                id: 43,
+                part: 4,
+                difficulty: "Moyen",
+                question: "Dans le fichier '/etc/passwd', quelle information se trouve dans le 3ème champ de la ligne 'daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin' ?",
+                options: [
+                    "Le login de l'utilisateur",
+                    "L'UID de l'utilisateur",
+                    "Le GID principal de l'utilisateur",
+                    "Le répertoire personnel"
+                ],
+                correct: 1,
+                explanation: "Diapo 138 : Ordre des champs dans /etc/passwd : 1:Login, 2:Mot de passe (x), 3:UID, 4:GID principal, 5:Commentaire, 6:Home, 7:Shell."
+            },
+            {
+                id: 44,
+                part: 4,
+                difficulty: "Moyen",
+                question: "Quelle commande rapide permet de lister directement tous les logins des utilisateurs du système sans afficher les autres champs ?",
+                options: [
+                    "cut -d: -f1 /etc/passwd (ou compgen -u)",
+                    "cat /etc/group",
+                    "ls -u /home",
+                    "id -all"
+                ],
+                correct: 0,
+                explanation: "Diapo 139 : Pour lister uniquement les logins : soit 'cut -d: -f1 /etc/passwd', soit la commande 'compgen -u'."
+            },
+            {
+                id: 45,
+                part: 4,
+                difficulty: "Facile",
+                question: "Dans quel fichier sont enregistrés les groupes d'utilisateurs avec leur GID et la liste de leurs membres ?",
+                options: [
+                    "/etc/passwd",
+                    "/etc/group",
+                    "/etc/shadow",
+                    "/etc/gshadow"
+                ],
+                correct: 1,
+                explanation: "Diapo 140 : L'ensemble des groupes est listé dans le fichier '/etc/group' (Format: nom:mot_de_passe:GID:membres)."
+            },
+            {
+                id: 46,
+                part: 4,
+                difficulty: "Facile",
+                question: "Que retourne la commande 'id' si aucun nom d'utilisateur n'est spécifié en paramètre ?",
+                options: [
+                    "Elle affiche la liste de tous les utilisateurs du système",
+                    "Elle affiche l'UID, le GID principal et tous les groupes de l'utilisateur qui exécute la commande",
+                    "Elle bascule la session vers le compte root",
+                    "Elle renvoie une erreur de paramètre manquant"
+                ],
+                correct: 1,
+                explanation: "Diapo 142 : 'id [user]' : Si non-spécifié, affiche les informations (UID, GID, groupes) de l'utilisateur exécutant la commande."
+            },
+            {
+                id: 47,
+                part: 4,
+                difficulty: "Moyen",
+                question: "Quelle est la différence fondamentale entre la commande 'adduser' et la commande 'useradd' sous Linux Debian/Ubuntu ?",
+                options: [
+                    "'adduser' est une commande interactive conviviale ; 'useradd' est la commande bas niveau non-interactive idéale pour les scripts",
+                    "'useradd' crée un groupe alors que 'adduser' crée un compte",
+                    "'adduser' supprime un compte et 'useradd' l'ajoute",
+                    "Il n'y a aucune différence, ce sont des alias"
+                ],
+                correct: 0,
+                explanation: "Diapos 145 & 148 : 'adduser' crée un utilisateur de façon interactive (demande le mdp, crée le home). 'useradd' est non-interactif, parfait pour les scripts d'automatisation."
+            },
+            {
+                id: 48,
+                part: 4,
+                difficulty: "Moyen",
+                question: "Pourquoi la suppression d'un groupe avec 'groupdel' peut-elle être refusée par le système ?",
+                options: [
+                    "Si le groupe possède plus de 10 membres",
+                    "Si le groupe est le groupe principal (primaire) d'un utilisateur existant",
+                    "Seul le créateur du groupe peut le supprimer",
+                    "Si le fichier /etc/group est verrouillé par SSH"
+                ],
+                correct: 1,
+                explanation: "Diapo 150 : Vous ne pouvez pas supprimer le groupe primaire d'un utilisateur. Chaque utilisateur utilisant ce groupe doit d'abord être supprimé (ou son groupe primaire modifié)."
+            },
+            {
+                id: 49,
+                part: 4,
+                difficulty: "Facile",
+                question: "Quelle commande permet de modifier le mot de passe d'un compte utilisateur sous Linux ?",
+                options: [
+                    "chpass",
+                    "passwd",
+                    "setpassword",
+                    "usermod -p"
+                ],
+                correct: 1,
+                explanation: "Diapo 151 : 'passwd [utilisateur]' modifie le mot de passe d'un utilisateur (de l'utilisateur courant si non spécifié)."
+            },
+            {
+                id: 50,
+                part: 4,
+                difficulty: "Moyen",
+                question: "Quelle est la syntaxe recommandée pour ajouter un utilisateur existant nommé 'etudiant' dans un groupe existant nommé 'tp' ?",
+                options: [
+                    "adduser etudiant tp",
+                    "addgroup etudiant tp",
+                    "chown etudiant:tp",
+                    "usermod --create etudiant tp"
+                ],
+                correct: 0,
+                explanation: "Diapos 145 & 152 : Pour ajouter un utilisateur existant à un groupe existant : 'adduser nom_utilisateur nom_groupe'."
+            }
+        ];
+
+        /* ==========================================================================
+           QUIZ STATE VARIABLES
+           ========================================================================== */
+        let currentFilterPart = 'ALL'; // 'ALL', 1, 2, 3, 4
+        let currentMode = 'PRACTICE';  // 'PRACTICE' or 'EXAM'
+        let activeQuestions = [];
+        let currentQuestionIndex = 0;
+        let userAnswers = [];         // Array to store user selections
+        let timerInterval = null;
+        let secondsElapsed = 0;
+
+        /* ==========================================================================
+           INITIALIZATION & NAVIGATION
+           ========================================================================== */
+        window.onload = function() {
+            // Apply saved dark/light theme
+            if (localStorage.getItem('theme') === 'light') {
+                document.documentElement.classList.remove('dark');
+                document.getElementById('themeIcon').className = 'fa-solid fa-sun text-base';
+            } else {
+                document.documentElement.classList.add('dark');
+                document.getElementById('themeIcon').className = 'fa-solid fa-moon text-base';
+            }
+        };
+
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            const icon = document.getElementById('themeIcon');
+            if (isDark) {
+                icon.className = 'fa-solid fa-moon text-base';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.className = 'fa-solid fa-sun text-base';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        function selectPartFilter(part) {
+            currentFilterPart = part;
+            const buttons = document.querySelectorAll('#partSelectorGroup .part-btn');
+            buttons.forEach(btn => {
+                const btnPart = btn.getAttribute('data-part');
+                if (btnPart == part || (part === 'ALL' && btnPart === 'ALL')) {
+                    btn.className = "part-btn p-4 rounded-2xl border-2 text-left transition-all border-brand-500 bg-brand-50/50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-300";
+                    btn.querySelector('.badge').className = "badge font-mono text-xs px-2 py-0.5 rounded-full bg-brand-200 dark:bg-brand-800 text-brand-800 dark:text-brand-200";
+                } else {
+                    btn.className = "part-btn p-4 rounded-2xl border-2 text-left transition-all border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600";
+                    btn.querySelector('.badge').className = "badge font-mono text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300";
+                }
+            });
+        }
+
+        function selectMode(mode) {
+            currentMode = mode;
+        }
+
+        function resetToHome() {
+            clearInterval(timerInterval);
+            document.getElementById('welcomeScreen').classList.remove('hidden');
+            document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* ==========================================================================
+           QUIZ ENGINE LOGIC
+           ========================================================================== */
+        function startQuiz() {
+            // Filter questions
+            if (currentFilterPart === 'ALL') {
+                activeQuestions = [...quizDatabase];
+            } else {
+                activeQuestions = quizDatabase.filter(q => q.part === parseInt(currentFilterPart));
+            }
+
+            currentQuestionIndex = 0;
+            userAnswers = new Array(activeQuestions.length).fill(null);
+            secondsElapsed = 0;
+
+            // UI Switch
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('quizScreen').classList.remove('hidden');
+
+            // Timer Setup
+            clearInterval(timerInterval);
+            document.getElementById('timerDisplay').textContent = "00:00";
+            timerInterval = setInterval(() => {
+                secondsElapsed++;
+                const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+                const secs = String(secondsElapsed % 60).padStart(2, '0');
+                document.getElementById('timerDisplay').textContent = `${mins}:${secs}`;
+            }, 1000);
+
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = activeQuestions[currentQuestionIndex];
+            
+            // Header Infos
+            document.getElementById('partBadge').textContent = `Partie ${q.part}`;
+            document.getElementById('questionCounter').textContent = `Question ${currentQuestionIndex + 1} / ${activeQuestions.length}`;
+            document.getElementById('difficultyBadge').textContent = `Difficulté : ${q.difficulty}`;
+            
+            // Progress Bar
+            const progressPercent = ((currentQuestionIndex + 1) / activeQuestions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progressPercent}%`;
+
+            // Question Text with code highlight styling
+            document.getElementById('questionText').innerHTML = formatCodeInText(q.question);
+
+            // Options rendering
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+
+            const explanationPanel = document.getElementById('explanationPanel');
+            explanationPanel.classList.add('hidden');
+
+            const nextBtn = document.getElementById('nextBtn');
+            nextBtn.classList.add('hidden');
+
+            const existingAnswer = userAnswers[currentQuestionIndex];
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full p-4 rounded-2xl border-2 text-left font-medium transition-all flex items-center justify-between group border-slate-200 dark:border-slate-700 hover:border-brand-400 dark:hover:border-brand-500 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100";
+                
+                const letter = String.fromCharCode(65 + idx); // A, B, C, D
+                
+                btn.innerHTML = `
+                    <div class="flex items-center space-x-3.5 pr-2">
+                        <span class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-mono text-sm font-bold flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition-colors">
+                            ${letter}
+                        </span>
+                        <span class="text-sm leading-snug">${formatCodeInText(opt)}</span>
+                    </div>
+                    <div class="icon-indicator text-lg opacity-0"></div>
+                `;
+
+                btn.onclick = () => handleOptionClick(idx);
+
+                // If already answered (e.g. in practice mode revisiting)
+                if (existingAnswer !== null) {
+                    btn.disabled = true;
+                    if (idx === q.correct) {
+                        btn.className = "w-full p-4 rounded-2xl border-2 text-left font-medium transition-all flex items-center justify-between border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/20 text-emerald-900 dark:text-emerald-200";
+                        btn.querySelector('.icon-indicator').innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500"></i>`;
+                        btn.querySelector('.icon-indicator').classList.remove('opacity-0');
+                    } else if (idx === existingAnswer) {
+                        btn.className = "w-full p-4 rounded-2xl border-2 text-left font-medium transition-all flex items-center justify-between border-rose-500 bg-rose-50/50 dark:bg-rose-900/20 text-rose-900 dark:text-rose-200";
+                        btn.querySelector('.icon-indicator').innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-500"></i>`;
+                        btn.querySelector('.icon-indicator').classList.remove('opacity-0');
+                    }
+                }
+
+                container.appendChild(btn);
+            });
+
+            // If already answered, show explanation & next button in PRACTICE mode
+            if (existingAnswer !== null && currentMode === 'PRACTICE') {
+                showExplanation(existingAnswer === q.correct, q.explanation);
+                nextBtn.classList.remove('hidden');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleOptionClick(selectedIndex) {
+            const q = activeQuestions[currentQuestionIndex];
+            userAnswers[currentQuestionIndex] = selectedIndex;
+
+            if (currentMode === 'PRACTICE') {
+                // Disable all option buttons
+                const buttons = document.querySelectorAll('#optionsContainer button');
+                buttons.forEach((btn, idx) => {
+                    btn.disabled = true;
+                    if (idx === q.correct) {
+                        btn.className = "w-full p-4 rounded-2xl border-2 text-left font-medium transition-all flex items-center justify-between border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/20 text-emerald-900 dark:text-emerald-200";
+                        btn.querySelector('.icon-indicator').innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500"></i>`;
+                        btn.querySelector('.icon-indicator').classList.remove('opacity-0');
+                    } else if (idx === selectedIndex) {
+                        btn.className = "w-full p-4 rounded-2xl border-2 text-left font-medium transition-all flex items-center justify-between border-rose-500 bg-rose-50/50 dark:bg-rose-900/20 text-rose-900 dark:text-rose-200";
+                        btn.querySelector('.icon-indicator').innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-500"></i>`;
+                        btn.querySelector('.icon-indicator').classList.remove('opacity-0');
+                    }
+                });
+
+                showExplanation(selectedIndex === q.correct, q.explanation);
+                document.getElementById('nextBtn').classList.remove('hidden');
+
+            } else {
+                // EXAM MODE: Advance immediately to next question
+                nextQuestion();
+            }
+        }
+
+        function showExplanation(isCorrect, explanationText) {
+            const panel = document.getElementById('explanationPanel');
+            const header = document.getElementById('explanationHeader');
+            const text = document.getElementById('explanationText');
+
+            if (isCorrect) {
+                header.className = "font-bold text-sm flex items-center space-x-2 text-emerald-600 dark:text-emerald-400";
+                header.innerHTML = `<i class="fa-solid fa-check-circle"></i><span>Bonne réponse ! Explication du cours :</span>`;
+            } else {
+                header.className = "font-bold text-sm flex items-center space-x-2 text-rose-600 dark:text-rose-400";
+                header.innerHTML = `<i class="fa-solid fa-times-circle"></i><span>Réponse incorrecte. Rappel des diapos :</span>`;
+            }
+
+            text.innerHTML = formatCodeInText(explanationText);
+            panel.classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < activeQuestions.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        /* ==========================================================================
+           FINISH & RESULTS REPORT
+           ========================================================================== */
+        function finishQuiz() {
+            clearInterval(timerInterval);
+
+            // Compute score
+            let correctCount = 0;
+            activeQuestions.forEach((q, idx) => {
+                if (userAnswers[idx] === q.correct) {
+                    correctCount++;
+                }
+            });
+
+            const total = activeQuestions.length;
+            const percentage = Math.round((correctCount / total) * 100);
+
+            // UI Elements
+            document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+
+            document.getElementById('scoreNumber').textContent = correctCount;
+            document.getElementById('totalQuestionsNumber').textContent = total;
+            document.getElementById('scorePercentage').textContent = `${percentage}% de réussite`;
+            
+            // Format time
+            const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+            const secs = String(secondsElapsed % 60).padStart(2, '0');
+            document.getElementById('totalTimeSpent').textContent = `${mins}:${secs}`;
+            document.getElementById('correctCount').textContent = correctCount;
+            document.getElementById('incorrectCount').textContent = total - correctCount;
+
+            // Score message & icon
+            const msg = document.getElementById('scoreMessage');
+            const icon = document.getElementById('scoreIcon');
+            if (percentage >= 80) {
+                msg.textContent = "Excellent travail ! Vous maîtrisez parfaitement le cours d'OS !";
+                icon.className = "fa-solid fa-trophy text-amber-500";
+            } else if (percentage >= 60) {
+                msg.textContent = "Bon travail ! Quelques détails de commandes à revoir.";
+                icon.className = "fa-solid fa-medal text-brand-500";
+            } else if (percentage >= 40) {
+                msg.textContent = "Résultat moyen. Une relecture attentive des diapos est conseillée.";
+                icon.className = "fa-solid fa-triangle-exclamation text-amber-500";
+            } else {
+                msg.textContent = "Des lacunes importantes. Prenez le temps de revoir les fiches récapitulatives.";
+                icon.className = "fa-solid fa-circle-xmark text-rose-500";
+            }
+
+            // Breakdown per Part
+            renderPartBreakdown();
+
+            // Render review table
+            renderReviewTable('ALL');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderPartBreakdown() {
+            const breakdownContainer = document.getElementById('partBreakdownContainer');
+            breakdownContainer.innerHTML = '';
+
+            const parts = [1, 2, 3, 4];
+            const partTitles = {
+                1: "Partie 1 (Inodes & Perms)",
+                2: "Partie 2 (Commandes & Flux)",
+                3: "Partie 3 (Proc & Démons)",
+                4: "Partie 4 (Utilisateurs)"
+            };
+
+            parts.forEach(pNum => {
+                const pQuestions = activeQuestions.filter(q => q.part === pNum);
+                if (pQuestions.length === 0) return;
+
+                let pCorrect = 0;
+                pQuestions.forEach(q => {
+                    const qIdx = activeQuestions.indexOf(q);
+                    if (userAnswers[qIdx] === q.correct) pCorrect++;
+                });
+
+                const pTotal = pQuestions.length;
+                const pPct = Math.round((pCorrect / pTotal) * 100);
+
+                const card = document.createElement('div');
+                card.className = "p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 space-y-2";
+                card.innerHTML = `
+                    <div class="flex items-center justify-between text-xs font-bold">
+                        <span class="text-slate-700 dark:text-slate-200">${partTitles[pNum]}</span>
+                        <span class="font-mono ${pPct >= 60 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}">${pCorrect} / ${pTotal} (${pPct}%)</span>
+                    </div>
+                    <div class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                        <div class="h-full ${pPct >= 60 ? 'bg-emerald-500' : 'bg-rose-500'}" style="width: ${pPct}%"></div>
+                    </div>
+                `;
+                breakdownContainer.appendChild(card);
+            });
+        }
+
+        function renderReviewTable(filterMode) {
+            const container = document.getElementById('reviewContainer');
+            container.innerHTML = '';
+
+            activeQuestions.forEach((q, idx) => {
+                const uAns = userAnswers[idx];
+                const isCorrect = uAns === q.correct;
+
+                if (filterMode === 'ERRORS' && isCorrect) return;
+
+                const item = document.createElement('div');
+                item.className = `p-4 sm:p-5 rounded-2xl border ${isCorrect ? 'border-emerald-200 dark:border-emerald-900/40 bg-emerald-50/30 dark:bg-emerald-900/10' : 'border-rose-200 dark:border-rose-900/40 bg-rose-50/30 dark:bg-rose-900/10'} space-y-3`;
+
+                const userAnsText = uAns !== null ? q.options[uAns] : "Non répondu";
+                const correctAnsText = q.options[q.correct];
+
+                item.innerHTML = `
+                    <div class="flex items-start justify-between gap-2">
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-2">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Q${idx + 1} (Partie ${q.part})</span>
+                                <span class="text-xs font-semibold ${isCorrect ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}">
+                                    <i class="fa-solid ${isCorrect ? 'fa-check-circle' : 'fa-times-circle'} mr-1"></i>
+                                    ${isCorrect ? 'Correct' : 'Incorrect'}
+                                </span>
+                            </div>
+                            <h4 class="font-bold text-sm text-slate-900 dark:text-white leading-snug">${formatCodeInText(q.question)}</h4>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs pt-1">
+                        <div class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                            <span class="text-slate-400 block text-[10px] uppercase font-bold">Votre réponse :</span>
+                            <span class="${isCorrect ? 'text-emerald-600 dark:text-emerald-400 font-semibold' : 'text-rose-600 dark:text-rose-400 font-semibold'}">${formatCodeInText(userAnsText)}</span>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                            <span class="text-slate-400 block text-[10px] uppercase font-bold">Bonne réponse :</span>
+                            <span class="text-emerald-600 dark:text-emerald-400 font-semibold">${formatCodeInText(correctAnsText)}</span>
+                        </div>
+                    </div>
+
+                    <div class="p-3 rounded-xl bg-white/60 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                        <strong class="text-slate-800 dark:text-slate-200">Explication du cours :</strong> ${formatCodeInText(q.explanation)}
+                    </div>
+                `;
+
+                container.appendChild(item);
+            });
+
+            if (container.children.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-slate-400 text-sm">
+                        <i class="fa-solid fa-circle-check text-emerald-500 text-3xl mb-2 block"></i>
+                        Aucune erreur enregistrée dans ce filtre ! Félicitations !
+                    </div>
+                `;
+            }
+        }
+
+        function filterReviewTable(mode) {
+            document.getElementById('filterReviewAll').className = mode === 'ALL' ? "px-3 py-1.5 rounded-lg bg-brand-600 text-white font-semibold" : "px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-semibold";
+            document.getElementById('filterReviewErrors').className = mode === 'ERRORS' ? "px-3 py-1.5 rounded-lg bg-brand-600 text-white font-semibold" : "px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-semibold";
+            renderReviewTable(mode);
+        }
+
+        function restartQuizWithSameFilter() {
+            startQuiz();
+        }
+
+        /* Helper to wrap commands and Linux terms in styled code badges */
+        function formatCodeInText(text) {
+            if (!text) return '';
+            // Replaces text inside single quotes or explicit commands with styled code blocks
+            return text.replace(/'([^']+)'/g, '<code class="code-font px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700/80 text-brand-600 dark:text-brand-300 text-[0.9em] border border-slate-200 dark:border-slate-600">$1</code>');
+        }
+    </script>
+</body>
+</html>
